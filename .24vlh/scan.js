@@ -7,14 +7,13 @@ const results = [];
 
 function getDirContents(directoryPath) {
     const files = fs.readdirSync(directoryPath);
-    const pattern = new RegExp('^(.(?!.*\\.(spec|type|interface|model)s?\\.ts$))*$', 'gm');
+    const pattern = new RegExp('^(?!.*(\\.(spec|type|interface|model)s?\\.ts$|\\/index\\.ts$)).*', 'gm');
     files.forEach((str) => {
         let filePath = path.join(directoryPath, str);
         if (fs.lstatSync(filePath).isFile()) {
-            if (
-                path.extname(filePath) === '.ts' && pattern.test(filePath)
-            ) {
+            if (path.extname(filePath) === '.ts' && pattern.test(filePath)) {
                 results.push(filePath);
+                pattern.lastIndex = 0;
             }
         } else {
             getDirContents(filePath);
