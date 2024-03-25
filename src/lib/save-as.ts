@@ -4,8 +4,10 @@
  * @param {string} filePath - The file path where the document will be saved.
  * @param {Document} document - The document object to be saved.
  * @param {string} [forceDownloadAndSetName] - Optional parameter to force download the file and set the downloaded file name.
- *
  * @return {void}
+ * @example
+ *  SaveAs('path/to/file.txt', document);
+ *  SaveAs('path/to/file.txt', document, 'new-file-name.txt');
  */
 export function SaveAs(
   filePath: string,
@@ -31,6 +33,9 @@ export function SaveAs(
  * @param {Document} document - The document to be saved.
  * @param {string} [forceDownloadAndSetName] - Optional. The name of the file when force downloading.
  * @returns {void}
+ * @example
+ *  SaveAsPrimitive('path/to/file.txt', document);
+ *  SaveAsPrimitive('path/to/file.txt', document, 'new-file-name.txt');
  */
 export function SaveAsPrimitive(
   filePath: string,
@@ -52,10 +57,15 @@ export function SaveAsPrimitive(
 
 /**
  * Save the given Blob as a file by creating a temporary URL and invoking the SaveAs function.
+ *
  * @param {Blob} blob - The Blob to save as a file.
  * @param {Document} document - The current Document object.
  * @param {string} [forceDownloadAndSetName] - Optional parameter to force the file download and set a custom file name.
  * @return {void}
+ * @example
+ *  const blob = new Blob(['Hello, world!'], { type: 'text/plain' });
+ *  SaveAsBlob(blob, document);
+ *  SaveAsBlob(blob, document, 'new-file-name.txt');
  */
 export function SaveAsBlob(
   blob: Blob,
@@ -74,6 +84,9 @@ export function SaveAsBlob(
  * @param {Document} document - The current Document object.
  * @param {string} [forceDownloadAndSetName] - Optional parameter specifying the name for the saved file.
  * @return {undefined}
+ * @example
+ *  SaveAsText('Hello, world!', document);
+ *  SaveAsText('Hello, world!', document, 'new-file-name.txt');
  */
 export function SaveAsText(
   text: string,
@@ -91,6 +104,10 @@ export function SaveAsText(
  * @param {Document} document - The current Document object.
  * @param {string} [forceDownloadAndSetName] - Optional parameter to force download and set the name of the file.
  * @return {void}
+ * @example
+ *  const json = { property1: 'value1', property2: 'value2' };
+ *  SaveAsJson(json, document);
+ *  SaveAsJson(json, document, 'new-file-name.json');
  */
 export function SaveAsJson(
   json: unknown,
@@ -108,6 +125,17 @@ export function SaveAsJson(
  * @param {Document} document - The current Document object.
  * @param {string} [forceDownloadAndSetName] Optional. The name to be used for the downloaded CSV file.
  * @return {void}
+ * @example
+ *  const data = [
+ *  ['Name',
+ *  'Age'],
+ *  ['John Doe',
+ *  30],
+ *  ['Jane Doe',
+ *  29]
+ *  ];
+ *  SaveAsCsv(data, document);
+ *  SaveAsCsv(data, document, 'new-file-name.csv');
  */
 export function SaveAsCsv(
   data: unknown[][],
@@ -124,8 +152,11 @@ export function SaveAsCsv(
  * @param {string} xml - The XML content to save as a file.
  * @param {Document} document - The current Document object.
  * @param {string} [forceDownloadAndSetName] - Optional. The filename to use for the downloaded file.
- *
  * @return {void}
+ * @example
+ *  const xml = '<root><element1>value1</element1><element2>value2</element2></root>';
+ *  SaveAsXml(xml, document);
+ *  SaveAsXml(xml, document, 'new-file-name.xml');
  */
 export function SaveAsXml(
   xml: string,
@@ -144,6 +175,10 @@ export function SaveAsXml(
  * @param {string} [forceDownloadAndSetName] - Optional. Specifies the name of the file to be downloaded.
  *                                              If not provided, the default name will be used.
  * @return {void}
+ * @example
+ *  const html = '<!DOCTYPE html><html><head><title>My HTML</title></head><body><h1>Hello, world!</h1></body></html>';
+ *  SaveAsHtml(html, document);
+ *  SaveAsHtml(html, document, 'new-file-name.html');
  */
 export function SaveAsHtml(
   html: string,
@@ -161,6 +196,11 @@ export function SaveAsHtml(
  * @param {Document} document - The current Document object.
  * @param {string} [forceDownloadAndSetName] - (Optional) The desired name for the downloaded file.
  * @returns {void}
+ * @example
+ *  const image = new Image();
+ *  image.src = 'path/to/image.png';
+ *  SaveAsImage(image, document);
+ *  SaveAsImage(image, document, 'new-file-name.png');
  */
 export function SaveAsImage(
   image: HTMLImageElement,
@@ -185,6 +225,13 @@ export function SaveAsImage(
  * @param {string} [forceDownloadAndSetName] - Optional. The name of the file to force download and set.
  *                                              If not provided, the browser will use a default name.
  * @return {void}
+ * @example
+ *  const canvas = document.createElement('canvas');
+ *  const context = canvas.getContext('2d');
+ *  context.fillStyle = 'red';
+ *  context.fillRect(0, 0, 100, 100);
+ *  SaveAsCanvas(canvas, document);
+ *  SaveAsCanvas(canvas, document, 'new-file-name.png');
  */
 export function SaveAsCanvas(
   canvas: HTMLCanvasElement,
@@ -202,6 +249,11 @@ export function SaveAsCanvas(
  * @param {Blob} pdf - The PDF to be saved.
  * @param {Document} document - The current Document object.
  * @param {string} [forceDownloadAndSetName] - Optional parameter to force the download and specify a custom name for the file.
+ * @return {void}
+ * @example
+ *  const pdf = new Blob(['%PDF-1.4 ...'], { type: 'application/pdf' });
+ *  SaveAsPdf(pdf, document);
+ *  SaveAsPdf(pdf, document, 'new-file-name.pdf');
  */
 export function SaveAsPdf(
   pdf: Blob,
@@ -219,6 +271,10 @@ export function SaveAsPdf(
  * @param {string} [forceDownloadAndSetName] - The name to force the download as.
  * @param {BlobPropertyBag} [options] - The options to pass to the Blob constructor.
  * @return {void}
+ * @example
+ *  const audio = new Audio('path/to/audio.mp3');
+ *  SaveAsAudio(audio, document);
+ *  SaveAsAudio(audio, document, 'new-file-name.mp3');
  */
 export function SaveAsAudio(
   audio: HTMLAudioElement,
@@ -238,6 +294,11 @@ export function SaveAsAudio(
  * @param {string} [forceDownloadAndSetName] - The name to be used for the downloaded video file. If not provided, the original video file name will be used.
  * @param {BlobPropertyBag} [options] - The options for creating the Blob object.
  * @return {void}
+ * @example
+ *  const video = document.createElement('video');
+ *  video.src = 'path/to/video.mp4';
+ *  SaveAsVideo(video, document);
+ *  SaveAsVideo(video, document, 'new-file-name.mp4');
  */
 export function SaveAsVideo(
   video: HTMLVideoElement,
@@ -251,13 +312,16 @@ export function SaveAsVideo(
 
 /**
  * Saves the given file as a file on the client-side.
- * @param {Document} document - The current Document object.
  * If a new name is provided, it forces the download with the new name.
  *
  * @param {File} file - The file to be saved.
+ * @param {Document} document - The current Document object.
  * @param {string} [forceDownloadAndSetName] - Optional. The new name for the downloaded file.
- *
  * @return {void}
+ * @example
+ *  const file = new File(['Hello, world!'], 'file.txt', { type: 'text/plain' });
+ *  SaveAsFile(file, document);
+ *  SaveAsFile(file, document, 'new-file-name.txt');
  */
 export function SaveAsFile(
   file: File,
@@ -274,6 +338,10 @@ export function SaveAsFile(
  * @param {Document} document - The current Document object.
  * @param {string} [forceDownloadAndSetName] - Optional parameter to force download and set the name of the file.
  * @return {void}
+ * @example
+ *  const buffer = new ArrayBuffer(8);
+ *  SaveAsArrayBuffer(buffer, document);
+ *  SaveAsArrayBuffer(buffer, document, 'new-file-name.bin');
  */
 export function SaveAsArrayBuffer(
   buffer: ArrayBuffer,
@@ -290,8 +358,11 @@ export function SaveAsArrayBuffer(
  * @param {BlobPart[]} parts - The array of BlobParts to be saved.
  * @param {Document} document - The current Document object.
  * @param {string} [forceDownloadAndSetName] - Optional parameter to force a specific download name.
- *
  * @return {void}
+ * @example
+ *  const parts = ['Hello, ', 'world!'];
+ *  SaveAsBlobParts(parts, document);
+ *  SaveAsBlobParts(parts, document, 'new-file-name.txt');
  */
 export function SaveAsBlobParts(
   parts: BlobPart[],

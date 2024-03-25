@@ -21,5 +21,13 @@ module.exports = {
         "text",
         "lcov",
         "clover"
-    ]
+    ],
+    coverageThreshold: {
+        global: {
+            branches: 90,
+            functions: 30,
+            lines: 70,
+            statements: 70
+        }
+    }
 };

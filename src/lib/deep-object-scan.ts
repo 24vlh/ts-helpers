@@ -8,6 +8,10 @@ import { ObjectHasPropertyDeepScan } from '@24vlh/ts-assert';
  * @param {unknown} object - The object to scan.
  * @param {(arg: unknown) => boolean} [assert] - An optional assertion function to validate the retrieved value's type.
  * @returns {T | undefined} - The value at the specified path if found and passes the assertion, otherwise undefined.
+ * @example
+ *  const object = { property1: { property2: 'value' } };
+ *  const value = DeepObjectScan<string>('property1.property2', object);
+ *  console.log(value); // 'value'
  */
 export function DeepObjectScan<T>(
   path: string,
