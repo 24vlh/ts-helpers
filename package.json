@@ -21,7 +21,7 @@
     "build:esm": "tsc -p tsconfig.json",
     "index:refresh": "node ./.24vlh/scan.js && git add ./src/index.ts",
     "lint": "npx eslint src/**/*.ts --fix",
-    "prepare": "husky install",
+    "prepare": "husky init",
     "prepublishOnly": "npm run build",
     "prettify": "npx prettier src/**/*.ts --write",
     "test": "npx jest --logHeapUsage"

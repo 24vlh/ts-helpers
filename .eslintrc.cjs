@@ -4,7 +4,7 @@ module.exports = {
         'eslint:recommended',
         'plugin:@typescript-eslint/recommended-type-checked',
         'plugin:@typescript-eslint/stylistic-type-checked',
-        'plugin:sonarjs/recommended',
+        'plugin:sonarjs/recommended-legacy',
         'prettier'
     ],
     parser: '@typescript-eslint/parser',
