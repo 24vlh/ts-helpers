@@ -5,10 +5,7 @@ module.exports = {
     testEnvironment: 'node',
     transform: {
         '^.+\\.ts?$': [
-            'ts-jest',
-            {
-                isolatedModules: true
-            }
+            'ts-jest'
         ]
     },
     maxWorkers: 2,
