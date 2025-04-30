@@ -18,15 +18,21 @@ export function DeepFreezePrimitive<T>(target: unknown): T {
       const v = (target as Record<string, unknown>)[k];
       DeepFreezePrimitive(v);
     });
+
+    return target as T;
   }
 
   if (OfArrayType(target) && !Object.isFrozen(target)) {
     Object.freeze(target);
     target.forEach((item) => DeepFreezePrimitive(item));
+
+    return target as T;
   }
 
   if (OfType(target, 'Date') && !Object.isFrozen(target)) {
     Object.freeze(target);
+
+    return target as T;
   }
 
   if (OfType(target, 'Map') && !Object.isFrozen(target)) {
@@ -35,12 +41,16 @@ export function DeepFreezePrimitive<T>(target: unknown): T {
       DeepFreezePrimitive(v);
     });
     Object.freeze(target);
+
+    return target as T;
   }
 
   if (OfType(target, 'Set') && !Object.isFrozen(target)) {
     target.forEach((v) => DeepFreezePrimitive(v));
     Object.freeze(target);
+
+    return target as T;
   }
 
-  return target;
+  return target as T;
 }
