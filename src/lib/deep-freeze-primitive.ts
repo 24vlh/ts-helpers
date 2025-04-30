@@ -29,27 +29,30 @@ export function DeepFreezePrimitive<T>(target: unknown): T {
     return target as T;
   }
 
-  if (OfType(target, 'Date') && !Object.isFrozen(target)) {
+  if (OfType<Date>(target, 'Date') && !Object.isFrozen(target)) {
     Object.freeze(target);
 
-    return target as Date as T;
+    return target as T;
   }
 
-  if (OfType(target, 'Map') && !Object.isFrozen(target)) {
-    (target as Map).forEach((v: unknown, k: unknown) => {
+  if (
+    OfType<Map<unknown, unknown>>(target, 'Map') &&
+    !Object.isFrozen(target)
+  ) {
+    target.forEach((v: unknown, k: unknown) => {
       DeepFreezePrimitive(k);
       DeepFreezePrimitive(v);
     });
     Object.freeze(target);
 
-    return target as Map as T;
+    return target as T;
   }
 
-  if (OfType(target, 'Set') && !Object.isFrozen(target)) {
-    (target as Set).forEach((v: unknown) => DeepFreezePrimitive(v));
+  if (OfType<Set<unknown>>(target, 'Set') && !Object.isFrozen(target)) {
+    target.forEach((v: unknown) => DeepFreezePrimitive(v));
     Object.freeze(target);
 
-    return target as Set as T;
+    return target as T;
   }
 
   return target as T;

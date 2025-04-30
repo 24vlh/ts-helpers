@@ -32,11 +32,11 @@ export function DeepCopyPrimitive<T>(target: unknown): T {
     return target as T;
   }
 
-  if (OfType(target, 'Date')) {
+  if (OfType<Date>(target, 'Date')) {
     return new Date(target.getTime()) as T;
   }
 
-  if (OfType(target, 'Map')) {
+  if (OfType<Map<unknown, unknown>>(target, 'Map')) {
     return new Map(
       Array.from(target, ([k, v]) => [
         DeepCopyPrimitive(k),
@@ -45,11 +45,13 @@ export function DeepCopyPrimitive<T>(target: unknown): T {
     ) as T;
   }
 
-  if (OfType(target, 'Set')) {
-    return new Set(Array.from(target).map((v) => DeepCopyPrimitive(v))) as T;
+  if (OfType<Set<unknown>>(target, 'Set')) {
+    return new Set(
+      Array.from(target).map((v: unknown) => DeepCopyPrimitive(v))
+    ) as T;
   }
 
-  if (OfType(target, 'RegExp')) {
+  if (OfType<RegExp>(target, 'RegExp')) {
     return new RegExp(target.source, target.flags) as T;
   }
 
