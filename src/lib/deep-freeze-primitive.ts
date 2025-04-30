@@ -14,7 +14,7 @@ import { OfArrayType, OfObjectType, OfType } from '@24vlh/ts-assert';
 export function DeepFreezePrimitive<T>(target: unknown): T {
   if (OfObjectType(target) && !Object.isFrozen(target)) {
     Object.freeze(target);
-    Object.keys(target).forEach((k) => {
+    Object.keys(target).forEach((k: string) => {
       const v = (target as Record<string, unknown>)[k];
       DeepFreezePrimitive(v);
     });
@@ -32,24 +32,24 @@ export function DeepFreezePrimitive<T>(target: unknown): T {
   if (OfType(target, 'Date') && !Object.isFrozen(target)) {
     Object.freeze(target);
 
-    return target as T;
+    return target as Date as T;
   }
 
   if (OfType(target, 'Map') && !Object.isFrozen(target)) {
-    target.forEach((v, k) => {
+    (target as Map).forEach((v: unknown, k: unknown) => {
       DeepFreezePrimitive(k);
       DeepFreezePrimitive(v);
     });
     Object.freeze(target);
 
-    return target as T;
+    return target as Map as T;
   }
 
   if (OfType(target, 'Set') && !Object.isFrozen(target)) {
-    target.forEach((v) => DeepFreezePrimitive(v));
+    (target as Set).forEach((v: unknown) => DeepFreezePrimitive(v));
     Object.freeze(target);
 
-    return target as T;
+    return target as Set as T;
   }
 
   return target as T;
