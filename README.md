@@ -26,6 +26,7 @@ console.log(
 
 - DeepCopyPrimitive
 - DeepCopy
+- DeepFreezePrimitive
 - DeepObjectScan
 - MoveArrayEntryIndex
 - ReadObjectProperty
