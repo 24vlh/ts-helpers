@@ -1,4 +1,4 @@
-import { OfObjectType } from '@24vlh/ts-assert';
+import { OfImmutablePrimitiveType, OfObjectType } from '@24vlh/ts-assert';
 
 /**
  * Creates a deep copy of a primitive value, array, or object.
@@ -12,21 +12,43 @@ import { OfObjectType } from '@24vlh/ts-assert';
  *  console.log(copy); // { property1: { property2: 'value' } }
  */
 export function DeepCopyPrimitive<T>(target: unknown): T {
-  if (target instanceof Date) {
-    return new Date(target.getTime()) as T;
-  } else if (Array.isArray(target)) {
-    return target.map((v) => DeepCopyPrimitive(v)) as T;
-  } else if (OfObjectType(target)) {
-    return Object.keys(target).reduce(
-      (cp: Record<string, unknown>, k: string) => {
-        cp[k] = DeepCopyPrimitive((target as Record<string, unknown>)[k]);
-        return cp;
-      },
-      {}
+  if (OfObjectType(target)) {
+    const entries = Object.entries(target);
+    return Object.fromEntries(
+      entries.map(([k, v]): [string, unknown] => [k, DeepCopyPrimitive(v)])
     ) as T;
-  } else {
+  }
+
+  if (Array.isArray(target)) {
+    return target.map((v) => DeepCopyPrimitive(v)) as T;
+  }
+
+  if (OfImmutablePrimitiveType(target)) {
     return target as T;
   }
+
+  if (target instanceof Date) {
+    return new Date(target.getTime()) as T;
+  }
+
+  if (target instanceof Map) {
+    return new Map(
+      Array.from(target, ([k, v]) => [
+        DeepCopyPrimitive(k),
+        DeepCopyPrimitive(v)
+      ])
+    ) as T;
+  }
+
+  if (target instanceof Set) {
+    return new Set(Array.from(target).map((v) => DeepCopyPrimitive(v))) as T;
+  }
+
+  if (target instanceof RegExp) {
+    return new RegExp(target.source, target.flags) as T;
+  }
+
+  return target as T;
 }
 
 /**
