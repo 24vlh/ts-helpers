@@ -1,6 +1,6 @@
 {
   "name": "@24vlh/ts-helpers",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Small footprint library that helps with repetitive tasks.",
   "author": "@vlah.io",
   "license": "Apache-2.0",
@@ -34,22 +34,23 @@
     ]
   },
   "dependencies": {
-    "@24vlh/ts-assert": "^1.0.15"
+    "@24vlh/ts-assert": "^1.0.16"
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",
-    "@types/node": "^22.15.3",
-    "@typescript-eslint/eslint-plugin": "^8.31.1",
-    "@typescript-eslint/parser": "^8.31.1",
-    "eslint": "^9.25.1",
-    "eslint-config-prettier": "^10.1.2",
-    "eslint-plugin-prettier": "^5.2.6",
+    "@types/node": "^22.15.21",
+    "@typescript-eslint/eslint-plugin": "^8.32.1",
+    "@typescript-eslint/parser": "^8.32.1",
+    "eslint": "^9.27.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-prettier": "^5.4.0",
     "eslint-plugin-sonarjs": "^3.0.2",
     "husky": "^9.1.7",
     "jest": "^29.7.0",
-    "lint-staged": "^15.5.1",
+    "lint-staged": "^16.0.0",
     "prettier": "^3.5.3",
-    "ts-jest": "^29.3.2",
+    "ts-jest": "^29.3.4",
+    "tslib": "^2.8.1",
     "typescript": "^5.8.3"
   }
 }
