@@ -22,11 +22,21 @@ jobs:
       - run: npm ci
       - run: npm test
 
+      - name: Upload build for publish
+        uses: actions/upload-artifact@v4
+        with:
+          name: package-build
+          path: .
+          retention-days: 1
+
   publish-npm:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: package-build
+          path: .
 
       - uses: actions/setup-node@v4
         with:
@@ -35,7 +45,5 @@ jobs:
 
       - name: Update npm for trusted publishing
         run: npm install -g npm@latest
-
-      - run: npm ci
 
       - run: npm publish --access public
