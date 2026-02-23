@@ -1,11 +1,18 @@
 export type SortDirection = 'asc' | 'desc';
 
 /**
- * Lexicographically compares primitive key arrays.
+ * Lexicographically compares composite primitive keys.
+ *
+ * Useful for deterministic sorting of table rows, grouped records, or cursor
+ * keys where each key is an ordered tuple (for example: `[lastName, id]`).
  *
  * @param {Array<string | number>} a - Left key.
  * @param {Array<string | number>} b - Right key.
  * @returns {number} -1, 0, or 1 comparator result.
+ *
+ * @example
+ * CompareKeys(['alpha', 2], ['alpha', 10]);
+ * // => -1
  */
 export function CompareKeys(
   a: Array<string | number>,
@@ -36,12 +43,19 @@ export function CompareKeys(
 }
 
 /**
- * Compares keys with configurable direction.
+ * Compares composite keys with configurable sort direction.
+ *
+ * Use this helper when the same key comparison should support both ascending
+ * and descending sort behavior without duplicating comparator logic.
  *
  * @param {Array<string | number>} a - Left key.
  * @param {Array<string | number>} b - Right key.
  * @param {SortDirection} direction - asc or desc.
  * @returns {number} Comparator result.
+ *
+ * @example
+ * CompareKeysWithDirection(['a', 1], ['a', 2], 'desc');
+ * // => 1
  */
 export function CompareKeysWithDirection(
   a: Array<string | number>,

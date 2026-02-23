@@ -6,12 +6,23 @@ export type ParseJsonPayloadResult<T = unknown> = {
 };
 
 /**
- * Parses an LLM-like payload as JSON.
- * Supports plain JSON, fenced JSON, and wrapper-text that contains one JSON object.
+ * Parses flexible payload text into JSON with safe error reporting.
+ *
+ * Designed for AI and mixed-content responses where payloads may be plain
+ * JSON, fenced markdown JSON, or surrounding text that contains one JSON object.
+ * The helper never throws; it returns `{ parsed, errors }` for predictable flow.
  *
  * @template T
  * @param {string} raw - Raw payload text.
  * @returns {ParseJsonPayloadResult<T>} Parse result with errors.
+ *
+ * @example
+ * ParseJsonPayload<{ ok: boolean }>('```json\\n{\"ok\":true}\\n```');
+ * // => { parsed: { ok: true }, errors: [] }
+ *
+ * @example
+ * ParseJsonPayload('not json');
+ * // => { parsed: null, errors: ['Payload must be valid JSON.'] }
  */
 export function ParseJsonPayload<T = unknown>(
   raw: string

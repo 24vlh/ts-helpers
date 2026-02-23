@@ -1,8 +1,15 @@
 /**
- * Tokenizes text for prefix-search matching.
+ * Normalizes free-form text into searchable prefix tokens.
+ *
+ * The tokenizer lowercases text, removes diacritics, strips punctuation, and
+ * returns unique tokens suitable for lightweight client-side search.
  *
  * @param {string} input - Source text.
  * @returns {string[]} Distinct normalized tokens.
+ *
+ * @example
+ * TokenizeSearchText('Crème brûlée, Test!');
+ * // => ['creme', 'brulee', 'test']
  */
 export function TokenizeSearchText(input: string): string[] {
   const normalized = input
@@ -20,10 +27,17 @@ export function TokenizeSearchText(input: string): string[] {
 }
 
 /**
- * Builds distinct search tokens from multiple values.
+ * Builds a unique token set from multiple candidate text values.
+ *
+ * Useful for indexing multiple fields (for example: name, email, tags) into a
+ * single searchable token list.
  *
  * @param {Array<string | undefined | null>} values - Source values.
  * @returns {string[]} Distinct token set.
+ *
+ * @example
+ * BuildSearchTokens(['John Doe', 'john@example.com', null]);
+ * // => ['john', 'doe', 'example', 'com']
  */
 export function BuildSearchTokens(
   values: Array<string | undefined | null>
@@ -41,11 +55,18 @@ export function BuildSearchTokens(
 }
 
 /**
- * Checks whether all query tokens match as prefixes in values.
+ * Checks whether every query token matches a value token by prefix.
+ *
+ * Useful for tolerant search UX where users can type partial terms and still
+ * match indexed content across multiple fields.
  *
  * @param {string | undefined} query - Search query.
  * @param {Array<string | undefined | null>} values - Target values.
  * @returns {boolean} Match result.
+ *
+ * @example
+ * MatchesSearchTokens('jo exa', ['John Doe', 'john@example.com']);
+ * // => true
  */
 export function MatchesSearchTokens(
   query: string | undefined,
