@@ -24,11 +24,25 @@ console.log(
 
 ### Helpers
 
+- BuildApiUrl
+- BuildSearchTokens
+- CompareKeys
+- CompareKeysWithDirection
+- CountWords
 - DeepCopyPrimitive
 - DeepCopy
 - DeepFreezePrimitive
 - DeepObjectScan
+- EscapeHtml
+- FormatBulletText
+- DecodeJsonCursor
+- EncodeJsonCursor
+- MatchesSearchTokens
 - MoveArrayEntryIndex
+- NormalizeBaseUrl
+- NormalizeBulletText
+- NormalizePositiveNumber
+- ParseJsonPayload
 - ReadObjectProperty
 - SaveAs
 - SaveAsPrimitive
@@ -46,5 +60,7 @@ console.log(
 - SaveAsFile
 - SaveAsArrayBuffer
 - SaveAsBlobParts
+- StripCodeFence
+- TokenizeSearchText
 
 @vlah.io
